@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Traffic Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 20px;
+        }
+        .result-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .result-item {
+            margin-bottom: 10px;
+        }
+        .result-item strong {
+            color: #555;
+        }
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .back-btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Traffic Information</h1>
+        <div class="result-item">
+            <strong>Origin:</strong> <span th:text="${origin}"></span>
+        </div>
+        <div class="result-item">
+            <strong>Destination:</strong> <span th:text="${destination}"></span>
+        </div>
+        <div class="result-item">
+            <strong>Distance:</strong> <span th:text="${distance}"></span> km
+        </div>
+        <div class="result-item">
+            <strong>Duration Without Traffic:</strong> <span th:text="${duration_without_traffic}"></span>
+        </div>
+        <div class="result-item">
+            <strong>Duration With Traffic:</strong> <span th:text="${duration_with_traffic}"></span>
+        </div>
+        <div class="result-item">
+            <strong>Traffic Severity:</strong> <span th:text="${traffic_severity}"></span>
+        </div>
+        <a href="/map" class="back-btn">Back to Form</a>
+    </div>
+</body>
+</html>

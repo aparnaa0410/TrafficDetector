@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAPBj6R29p4PUqLrIFIQqaDC9F6jo0vTo&libraries=drawing,places"
+      async
+      defer
+    ></script>
+    <script>
+      let map;
+      let directionsService;
+      let directionsRenderer;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 37.7749, lng: -122.4194 }, // Default to San Francisco
+          zoom: 12,
+        });
+
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+      }
+
+      // Function to update the route based on user input
+      function updateRoute() {
+        const origin = document.getElementById("origin").value;
+        const destination = document.getElementById("destination").value;
+        const mode = document.getElementById("mode").value;
+        const departureTime = document.getElementById("departureTime").value;
+
+        if (!origin || !destination || !mode || !departureTime) {
+          alert("Please fill in all fields!");
+          return;
+        }
+
+        const request = {
+          origin: origin,
+          destination: destination,
+          travelMode: google.maps.TravelMode[mode.toUpperCase()],
+          departureTime: new Date(departureTime), // Set the departure time
+        };
+
+        // Call the Google Directions API to get the route
+        directionsService.route(request, function (result, status) {
+          if (status === "OK") {
+            directionsRenderer.setDirections(result);
+          } else {
+            alert("Could not find a route, please try again.");
+          }
+        });
+      }
+    </script>
+    <style>
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+      .form-container {
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body onload="initMap()">
+    <div class="form-container">
+      <h3>Enter Travel Details</h3>
+      <label for="origin">Origin:</label>
+      <input type="text" id="origin" placeholder="Enter origin (e.g., San Francisco)" /><br />
+
+      <label for="destination">Destination:</label>
+      <input
+        type="text"
+        id="destination"
+        placeholder="Enter destination (e.g., Los Angeles)"
+      /><br />
+
+      <label for="mode">Mode of Transport:</label>
+      <select id="mode">
+        <option value="driving">Driving</option>
+        <option value="transit">Transit</option>
+        <option value="walking">Walking</option>
+      </select><br />
+
+      <label for="departureTime">Departure Time:</label>
+      <input
+        type="datetime-local"
+        id="departureTime"
+        value="2024-11-24T12:00"
+      /><br />
+
+      <button onclick="updateRoute()">Update Route</button>
+    </div>
+
+    <div id="map"></div>
+  </body>
+</html>

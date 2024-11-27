@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Traffic Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Traffic Information Form</h1>
+        <form action="/trafficSeverity" method="post">
+            <label for="origin">Origin:</label>
+            <input type="text" id="origin" name="origin" placeholder="Enter origin" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" placeholder="Enter destination" required>
+
+            <label for="departure_time">Departure Time:</label>
+            <input type="text" id="departure_time" name="departure_time" placeholder="Enter departure time" required>
+
+            <label for="mode">Mode:</label>
+            <select id="mode" name="mode" required>
+                <option value="driving">Driving</option>
+                <option value="walking">Walking</option>
+                <option value="bicycling">Bicycling</option>
+                <option value="transit">Transit</option>
+            </select>
+
+            <button type="submit">Get Traffic Info</button>
+        </form>
+    </div>
+</body>
+</html>
